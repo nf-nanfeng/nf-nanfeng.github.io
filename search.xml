@@ -4,6 +4,81 @@
   
     
     <entry>
+      <title>剑指 Offer 50. 第一个只出现一次的字符</title>
+      <link href="/2022/01/01/53f48b5d.html"/>
+      <url>/2022/01/01/53f48b5d.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。</p><p><strong>示例 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;abaccdeff&quot;</span><br><span class="line">输出：&#x27;b&#x27;</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;&quot; </span><br><span class="line">输出：&#x27; &#x27;</span><br></pre></td></tr></table></figure><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>通过哈希表记录每个字符的出现次数或者有没有多次出现，然后在遍历一次找到出现一次的字符。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">firstUniqChar</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    Map&lt;Character, Boolean&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Character ch : s.toCharArray()) &#123;</span><br><span class="line">        map.put(ch, map.containsKey(ch));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (Character ch : s.toCharArray()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!map.get(ch)) &#123;</span><br><span class="line">            <span class="keyword">return</span> ch;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指Offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指Offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 11. 旋转数组的最小数字</title>
+      <link href="/2022/01/01/3d94766b.html"/>
+      <url>/2022/01/01/3d94766b.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。</p><p>给你一个可能存在 <strong>重复</strong> 元素值的数组 <code>numbers</code> ，它原来是一个升序排列的数组，并按上述情形进行了一次旋转。请返回旋转数组的最小元素。例如，数组 <code>[3,4,5,1,2]</code> 为 <code>[1,2,3,4,5]</code> 的一次旋转，该数组的最小值为1。 </p><p><strong>示例 1：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[3,4,5,1,2]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：[2,2,2,0,1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>可以这么理解，<code>我们要找一个左边界</code>，但是这个<code>左边界</code>不是严格意义上的<code>左边界</code>，而是要最小的那一段。因此我们要判断最小的那一段在哪边？那么假设我们取数组中间的某一个数<code>num[i]</code>，如果这个数大于最右边的那个数，说明数组是有旋转的，而且小号的那一段就在右边，如果小于最后一个数呢？说明小号的那一段应该在左边，而且当前这个位置可能就是最小的位置。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minArray</span><span class="params">(<span class="keyword">int</span>[] numbers)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = numbers.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (numbers[mid] &gt; numbers[right]) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (numbers[mid] &lt; numbers[right]) &#123;</span><br><span class="line">            right = mid;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> numbers[left];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指Offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指Offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 04. 二维数组中的查找</title>
+      <link href="/2022/01/01/58b0f60b.html"/>
+      <url>/2022/01/01/58b0f60b.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个高效的函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p><p><strong>示例:</strong></p><p>现有矩阵 matrix 如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [1,   4,  7, 11, 15],</span><br><span class="line">  [2,   5,  8, 12, 19],</span><br><span class="line">  [3,   6,  9, 16, 22],</span><br><span class="line">  [10, 13, 14, 17, 24],</span><br><span class="line">  [18, 21, 23, 26, 30]</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>给定 target = <code>5</code>，返回 <code>true</code>。</p><p>给定 target = <code>20</code>，返回 <code>false</code>。</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>根据题目给出的信息，每行都是递增的，因此可以先看每行的最后一个元素，如果比较大，那么就在这一行里面找，如果比较小，那么说明在下一行里面，重复上述步骤即可。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">findNumberIn2DArray</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (matrix == <span class="keyword">null</span> || matrix.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n = matrix.length, m = matrix[<span class="number">0</span>].length, left = <span class="number">0</span>, right = m - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; n &amp;&amp; right &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (matrix[left][right] == target) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (matrix[left][right] &lt; target) &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>你也可以理解为，把数组的右上角提起来，做一棵二叉排序树，如果发现此时的节点大于目标值，那么就寻找左子树（left - 1），如果大于就寻找右子树（right + 1）</p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201011017085.png"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201011019280.png"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201011019458.png"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201011019243.png"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201011020894.png"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201011020075.png"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201011020631.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指Offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指Offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指 Offer 53 - II. 0～n-1中缺失的数字</title>
       <link href="/2021/12/31/4bce81b7.html"/>
       <url>/2021/12/31/4bce81b7.html</url>
