@@ -4,6 +4,81 @@
   
     
     <entry>
+      <title>剑指 Offer 63. 股票的最大利润</title>
+      <link href="/2022/01/04/8984ff24.html"/>
+      <url>/2022/01/04/8984ff24.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？</p><p><strong>示例 1:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,1,5,3,6,4]</span><br><span class="line">输出: 5</span><br><span class="line">解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。</span><br><span class="line">     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,6,4,3,1]</span><br><span class="line">输出: 0</span><br><span class="line">解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这个题目借助动态规划的思想，假设<code>dp[i]</code>表示的是在前<code>i</code>天中，最低价买入，最高价卖出所能得到的最大利益，则第<code>i</code>天的最大利润应当等于前一天的最大利润和当天价格卖出去的最大利润，即</p><p><code>dp[i] = Max(dp[i - 1], price[i] - min(cost))</code></p><p>因而可以得到如下代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (prices == <span class="keyword">null</span> || prices.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> minCost = prices[<span class="number">0</span>], profit = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.length; i++) &#123;</span><br><span class="line">        profit = Math.max(profit, prices[i] - Math.min(minCost, prices[i]));</span><br><span class="line">        minCost = Math.min(minCost, prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> profit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指Offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指Offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 10- II. 青蛙跳台阶问题</title>
+      <link href="/2022/01/04/ee60b5f6.html"/>
+      <url>/2022/01/04/ee60b5f6.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 <code>n</code> 级的台阶总共有多少种跳法。</p><p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p><p><strong>示例 1：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 2</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 7</span><br><span class="line">输出：21</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 0</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这个和斐波那契数列问题是一样的，对于有<code>n</code>级台阶的跳法，即在<code>n - 1</code>级台阶跳1步的跳法加上在<code>n - 2</code>级台阶跳2步的跳法，当<code>n == 0 or n == 1</code>的时候，就只有1种跳法。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numWays</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> numWays(n - <span class="number">1</span>) + numWays(n - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>同样的，这个也很耗时，需要通过非递归的方式来做。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numWays</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> p0 = <span class="number">1</span>, p1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> p2 = (p0 + p1) % <span class="number">1000000007</span>;</span><br><span class="line">        p0 = p1;</span><br><span class="line">        p1 = p2;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> p1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指Offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指Offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 10- I. 斐波那契数列</title>
+      <link href="/2022/01/04/7eea4da1.html"/>
+      <url>/2022/01/04/7eea4da1.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>写一个函数，输入 <code>n</code> ，求斐波那契（Fibonacci）数列的第 <code>n</code> 项（即 <code>F(N)</code>）。斐波那契数列的定义如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F(0) = 0,   F(1) = 1</span><br><span class="line">F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.</span><br></pre></td></tr></table></figure><p>斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。</p><p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p><p><strong>示例 1：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 2</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 5</span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>根据题目给出的公式<code>fn = fn-1 + fn-2</code>，不难写出代码</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>)) % <span class="number">1000000007</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>但这样的效率显然太慢了，递归是很慢的。于是需要使用非递归的方式来完成。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> p0 = <span class="number">0</span>, p1 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> p2 = (p0 + p1) % <span class="number">1000000007</span>;</span><br><span class="line">        p0 = p1;</span><br><span class="line">        p1 = p2;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> p1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指Offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指Offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指 Offer 28. 对称的二叉树</title>
       <link href="/2022/01/03/4b471022.html"/>
       <url>/2022/01/03/4b471022.html</url>
