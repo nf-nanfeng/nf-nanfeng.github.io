@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>剑指 Offer 52. 两个链表的第一个公共节点</title>
+      <link href="/2022/01/08/eea3e31f.html"/>
+      <url>/2022/01/08/eea3e31f.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个链表，找出它们的第一个公共节点。</p><p>如下面的两个链表<strong>：</strong></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081603706.png" alt="img"></p><p>在节点 c1 开始相交。</p><p><strong>示例 1：</strong></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081604695.png" alt="img"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3</span><br><span class="line">输出：Reference of the node with value = 8</span><br><span class="line">输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081605912.png" alt="img"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1</span><br><span class="line">输出：Reference of the node with value = 2</span><br><span class="line">输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure><p><strong>示例 3：</strong></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081606699.png" alt="img"></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2</span><br><span class="line">输出：null</span><br><span class="line">输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</span><br><span class="line">解释：这两个链表不相交，因此返回 null。</span><br></pre></td></tr></table></figure><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081609850.jpeg"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081610445.jpeg"></p><p><img src="https://pic.leetcode-cn.com/1e71047417d3fe70af13001889448ca7fc87f14628f9f8b3b2036663c5e7a861-%E5%B9%BB%E7%81%AF%E7%89%873.JPG"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081610127.jpeg"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081610007.jpeg"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081611724.jpeg"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081611541.jpeg"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081612393.jpeg"></p><p><img src="https://gitee.com/nf-nanfeng/blog-image-1/raw/master/img/202201081612707.jpeg"></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">    ListNode p1 = headA, p2 = headB;</span><br><span class="line">    <span class="keyword">while</span> (p1 != p2) &#123;</span><br><span class="line">        p1 = p1 == <span class="keyword">null</span> ? headB : p1.next;</span><br><span class="line">        p2 = p2 == <span class="keyword">null</span> ? headA : p2.next;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> p1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指Offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指Offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指 Offer 25. 合并两个排序的链表</title>
+      <link href="/2022/01/08/4bcf94ae.html"/>
+      <url>/2022/01/08/4bcf94ae.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。</p><p><strong>示例1：</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4</span><br><span class="line">输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</span><br></pre></td></tr></table></figure><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">    ListNode head = <span class="keyword">new</span> ListNode(-<span class="number">1</span>), p = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (l1 != <span class="keyword">null</span> || l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> val1 = l1 == <span class="keyword">null</span> ? Integer.MAX_VALUE : l1.val;</span><br><span class="line">        <span class="keyword">int</span> val2 = l2 == <span class="keyword">null</span> ? Integer.MAX_VALUE : l2.val;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (val1 &lt; val2) &#123;</span><br><span class="line">            p.next = l1;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            p.next = l2;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        p = p.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指Offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指Offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指 Offer 22. 链表中倒数第k个节点</title>
       <link href="/2022/01/07/4f2bc6ac.html"/>
       <url>/2022/01/07/4f2bc6ac.html</url>
